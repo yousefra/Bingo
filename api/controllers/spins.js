@@ -68,3 +68,20 @@ exports.getAllUserSpins = (req, res, next) => {
             })
         });
 };
+
+expoerts.getAllSpins = (req, res, next) => {
+    Sping.find()
+        .then(spins => {
+            res.status(200).json({
+                count: spins.length,
+                spins: spins,
+                gifts: spins.filter(spin => spin.giftFrom != 0).length
+            })
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        })
+}
