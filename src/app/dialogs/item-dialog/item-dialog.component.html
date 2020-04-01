@@ -1,0 +1,29 @@
+<div class="container">
+    <h1 class="title">{{data.title}}</h1>
+    <div class="sub-container">
+        <form [formGroup]="itemDialogForm" (ngSubmit)="onSubmit()" class="dialog-container">
+            <div class="content">
+                <div class="form-control">
+                    <input type="text" class="input" placeholder="Item name" formControlName="name" cdkFocusInitial>
+                </div>
+                <div class="form-control">
+                    <select class="input" formControlName="category">
+                        <option value="" disabled>Choose category</option>
+                        <option *ngFor="let c of data.categories" [ngValue]="c._id">{{c.name}}</option>
+                    </select>
+                </div>
+                <div class="form-control">
+                    <input type="file" class="input" placeholder="Category name" accept=".png,.jpg,.jpeg,.JPG"
+                        formControlName="file" (change)="onFileSelected($event)">
+                </div>
+            </div>
+            <div mat-dialog-actions>
+                <button class="btn" type="submit" [disabled]="!itemDialogForm.valid">{{data.buttonValue}}</button>
+            </div>
+        </form>
+        <div class="color-picker">
+            <h2>Item back color</h2>
+            <color-sketch (onChangeComplete)="changeComplete($event)"></color-sketch>
+        </div>
+    </div>
+</div>

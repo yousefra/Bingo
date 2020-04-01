@@ -1,0 +1,31 @@
+.trashBtn,
+.editBtn {
+  cursor: pointer;
+  width: 24px;
+}
+
+.trashTd,
+.editTd {
+  transition: var(--transition-speed);
+}
+
+.trashTd svg {
+  filter: grayscale(10%) opacity(0.8);
+}
+
+.editTd svg {
+  filter: grayscale(100%) opacity(0.7);
+}
+
+.trashTd svg:hover,
+.editTd svg:hover {
+  filter: grayscale(0) opacity(1);
+}
+
+.fa-trash {
+  color: var(--text-red);
+}
+
+.fa-edit {
+  color: rgb(35, 38, 44);
+}
