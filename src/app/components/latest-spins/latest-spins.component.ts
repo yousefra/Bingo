@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-latest-spins',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./latest-spins.component.css']
 })
 export class LatestSpinsComponent implements OnInit {
+
+  @Input() spins: any;
 
   constructor() { }
 

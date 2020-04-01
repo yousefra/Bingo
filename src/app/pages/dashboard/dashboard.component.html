@@ -2,12 +2,12 @@
 <div class="main-container">
     <div class="container">
         <div class="boxes">
-            <app-number-box></app-number-box>
-            <app-number-box></app-number-box>
-            <app-number-box></app-number-box>
+            <app-number-box [data]="usersBoxInput"></app-number-box>
+            <app-number-box [data]="spinsBoxInput"></app-number-box>
+            <app-number-box [data]="giftsBoxInput"></app-number-box>
         </div>
         <div class="latest-spins">
-            <app-latest-spins></app-latest-spins>
+            <app-latest-spins [spins]="spins"></app-latest-spins>
         </div>
     </div>
 </div>

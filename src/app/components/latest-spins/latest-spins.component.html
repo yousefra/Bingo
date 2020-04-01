@@ -15,22 +15,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Joe Rayan</td>
-                        <td>y.real.02@gmail.com</td>
-                        <td>Normal</td>
-                        <td>Socks</td>
+                    <tr *ngFor="let spin of spins">
+                        <td>{{spin?.user.name}}</td>
+                        <td>{{spin?.user.email}}</td>
+                        <td>{{spin?.itemCategory}}</td>
+                        <td>{{spin?.itemName}}</td>
                         <td>
-                            <div class="won">Won</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Natsheh Rayan</td>
-                        <td>y.natsheh.02@gmail.com</td>
-                        <td>Luxury</td>
-                        <td>TV</td>
-                        <td>
-                            <div class="gift">Gift</div>
+                            <div class="won" *ngIf="spin?.giftFrom === 0">Won</div>
+                            <div class="gift" *ngIf="spin?.giftFrom !== 0">Gift</div>
                         </td>
                     </tr>
                 </tbody>

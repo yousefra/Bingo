@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-number-box',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./number-box.component.css']
 })
 export class NumberBoxComponent implements OnInit {
+
+  @Input() data: any;
 
   constructor() { }
 

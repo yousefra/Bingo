@@ -61,6 +61,11 @@ export class BingoAPIService {
 		return this.sendReq('delete', `user/${userId}`);
 	}
 
+	// Spins
+	getSpins() {
+		return this.sendReq('get', 'spins/allSpins');
+	}
+
 	// Authentication
 	login(username: string, password: string) {
 		return this.sendReq('post', 'user/login', { username, password });
