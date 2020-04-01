@@ -1,0 +1,15 @@
+<form [formGroup]="categoryDialog" (ngSubmit)="onSubmit()" class="dialog-container">
+    <h1 class="title">{{data.title}}</h1>
+    <div class="content">
+        <div class="form-control">
+            <input class="input" required placeholder="Category name" formControlName="name" cdkFocusInitial>
+        </div>
+        <div class="form-control-2">
+            <input class="input" required placeholder="Category title" formControlName="categoryTitle">
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <button class="btn" type="submit" [disabled]="!categoryDialog.valid"
+            [mat-dialog-close]="data.name">{{data.buttonValue}}</button>
+    </div>
+</form>

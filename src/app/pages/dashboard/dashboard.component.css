@@ -1,0 +1,13 @@
+.container {
+  display: grid;
+  grid-template-columns: 400px auto;
+  grid-gap: 70px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.boxes {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
