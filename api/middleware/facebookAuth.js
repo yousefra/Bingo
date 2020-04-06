@@ -9,7 +9,7 @@ const User = require('mongoose').model('User');
 // };
 
 exports.generateToken = function (req, res, next) {
-    req.token = jwt.sign({ id: req.auth.id }, process.env.JWT_KEY, { expiresIn: 60 * 120 });
+    req.token = jwt.sign({ userId: req.auth.id }, process.env.JWT_KEY, { expiresIn: 60 * 120 });
     next();
 };
 
