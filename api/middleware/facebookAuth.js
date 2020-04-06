@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken'),
     expressJwt = require('express-jwt');
 
-const User = require('mongoose').model('User');
+const User = require('../controllers/user');
 
 //token handling middleware
 // exports.createToken = function (auth) {

@@ -3,7 +3,7 @@
 const passport = require('passport'),
     FacebookTokenStrategy = require('passport-facebook-token');
 
-const User = require('mongoose').model('User');
+const userController = require('../controllers/user');
 
 module.exports = function () {
 
@@ -12,7 +12,7 @@ module.exports = function () {
         clientSecret: 'b12d3de6a69efc709a221a7f758de76f'
     },
         function (accessToken, refreshToken, profile, done) {
-            User.upsertFbUser(accessToken, refreshToken, profile, function (err, user) {
+            userController.upsertFbUser(accessToken, refreshToken, profile, function (err, user) {
                 return done(err, user);
             });
         }));

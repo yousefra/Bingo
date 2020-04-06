@@ -65,13 +65,13 @@ exports.signup = (req, res, next) => {
 exports.login = (req, res, next) => {
     User.findOne({ username: req.body.username })
         .then(user => {
-            console.log(req.body.username, req.body.password)
             if (!user) {
                 return res.status(401).json({
                     message: 'Auth failed'
                 });
             }
-            bcrypt.compare(req.body.password, user.password, (err, result) => {
+            const password = user.password || user.toObject().password;
+            bcrypt.compare(req.body.password, password, (err, result) => {
                 if (err) {
                     console.log('found')
                     return res.status(401).json({
@@ -124,3 +124,30 @@ exports.isLoggedIn = (req, res, next) => {
         message: 'User is logged in'
     });
 }
+
+
+exports.upsertFbUser = (accessToken, refreshToken, profile, cb) => {
+    return User.findOne({ 'facebookProvider.id': profile.id }, (err, user) => {
+        // no user was found, lets create a new one
+        if (!user) {
+            var newUser = new User({
+                name: profile.displayName,
+                email: profile.emails[0].value,
+                facebookProvider: {
+                    id: profile.id,
+                    token: accessToken
+                },
+                role: 2
+            });
+
+            newUser.save((error, savedUser) => {
+                if (error) {
+                    console.log(error);
+                }
+                return cb(error, savedUser);
+            });
+        } else {
+            return cb(err, user);
+        }
+    });
+};
