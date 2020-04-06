@@ -22,7 +22,7 @@ export class ItemDialogComponent implements OnInit {
 
 	itemDialogForm: FormGroup;
 	selectedFile: File = null;
-	selectedColor: string = '#22194D';
+	selectedColor: string = this.data.backColor || '#22194D';
 	fileChanged: boolean = false;
 
 	constructor(

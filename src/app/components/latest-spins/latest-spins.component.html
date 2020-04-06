@@ -21,8 +21,8 @@
                         <td>{{spin?.itemCategory}}</td>
                         <td>{{spin?.itemName}}</td>
                         <td>
-                            <div class="won" *ngIf="spin?.giftFrom === 0">Won</div>
-                            <div class="gift" *ngIf="spin?.giftFrom !== 0">Gift</div>
+                            <div class="won" *ngIf="spin?.giftFrom == 0">Won</div>
+                            <div class="gift" *ngIf="spin?.giftFrom != 0">Gift</div>
                         </td>
                     </tr>
                 </tbody>

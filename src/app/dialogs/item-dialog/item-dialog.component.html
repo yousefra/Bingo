@@ -23,7 +23,7 @@
         </form>
         <div class="color-picker">
             <h2>Item back color</h2>
-            <color-sketch (onChangeComplete)="changeComplete($event)"></color-sketch>
+            <color-sketch [color]="selectedColor" (onChangeComplete)="changeComplete($event)"></color-sketch>
         </div>
     </div>
 </div>
