@@ -26,19 +26,19 @@ exports.addSpin = (req, res, next) => {
 
 exports.sendGift = (req, res, next) => {
     const spinId = req.params.spinId;
-    const userId = req.body.userId;
-    const updateOps = {
-        "user": userId,
-        "giftFrom": req.userData.userId
-    };
-    User.findById(userId)
-        .select('username')
+    const email = req.body.email;
+    User.findOne({ email: email })
+        .select('_id')
         .then(doc => {
             if (!doc) {
                 res.status(404).json({
                     message: 'User not found!'
                 });
             }
+            const updateOps = {
+                "user": doc._id,
+                "giftFrom": req.userData.userId
+            };
             return Spin.updateOne({ _id: spinId }, { $set: updateOps });
         })
         .then(result => {
