@@ -5,14 +5,20 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
+dotenv.config();
+mongoose.set('useCreateIndex', true);
+
 // Require the routes
 const categoriesRoutes = require('./api/routes/categories');
 const itemsRoutes = require('./api/routes/items');
 const userRoutes = require('./api/routes/user');
 const spinsRoutes = require('./api/routes/spins');
+const authRoutes = require('./api/routes/auth');
 
-dotenv.config();
-mongoose.set('useCreateIndex', true);
+const passportConfig = require('./api/middleware/passport');
+
+//setup configuration for facebook login
+passportConfig();
 
 // MongoDB Connection
 mongoose
@@ -31,19 +37,21 @@ app.use(bodyParser.json());
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, x-auth-token');
+    res.header('Access-Control-Expose-Headers', 'x-auth-token');
     if (req.method === 'OPTIONS') {
         res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
         return res.status(200).json({});
     }
     next();
-})
+});
 
 // Routes which should handle requests
 app.use('/categories', categoriesRoutes);
 app.use('/items', itemsRoutes);
 app.use('/user', userRoutes);
 app.use('/spins', spinsRoutes);
+app.use('/auth', authRoutes);
 
 app.use((req, res, next) => {
     const error = new Error('Not found');

@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "keywords": [
     "bingo",
@@ -19,14 +19,17 @@
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-jwt": "^5.3.1",
     "fs": "0.0.1-security",
     "http": "0.0.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.4",
+    "mongoose": "^5.9.7",
     "mongoose-reverse-populate-v2": "^1.2.4",
-    "morgan": "^1.9.1",
+    "morgan": "^1.10.0",
     "multer": "^1.4.2",
-    "underscore": "^1.9.2"
+    "passport": "^0.4.1",
+    "passport-facebook-token": "^3.3.0",
+    "underscore": "^1.10.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"

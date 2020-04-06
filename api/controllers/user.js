@@ -6,7 +6,8 @@ exports.getAllUsers = (req, res, next) => {
     User.find({ role: 2 })
         .then(users => {
             const oldUsers = users.filter(user => {
-                return new Date(new Date(user.createdDate.split('T')[0]).toDateString()) < new Date(new Date().toDateString());
+                const date = user.toObject().createdDate.split('T')[0];
+                return new Date(new Date(date).toDateString()) < new Date(new Date().toDateString());
             }).length;
             const currentUsers = users.length;
             const percent = Math.round(((currentUsers - oldUsers) / oldUsers) * 100);

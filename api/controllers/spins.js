@@ -69,20 +69,22 @@ exports.getAllUserSpins = (req, res, next) => {
         });
 };
 
-expoerts.getAllSpins = (req, res, next) => {
+exports.getAllSpins = (req, res, next) => {
     Spin.find()
         .populate('user', 'name email')
         .then(spins => {
             const gifts = spins.filter(spin => spin.giftFrom != 0);
 
             const oldSpins = spins.filter(spin => {
-                return new Date(new Date(spin.createdDate.split('T')[0]).toDateString()) < new Date(new Date().toDateString());
+                const date = spin.date.toJSON().slice(0, 10);
+                return new Date(new Date(date).toDateString()) < new Date(new Date().toDateString());
             }).length;
             const currentSpins = spins.length;
             const percent = Math.round(((currentSpins - oldSpins) / oldSpins) * 100);
 
             const oldGifts = gifts.filter(gift => {
-                return new Date(new Date(gift.createdDate.split('T')[0]).toDateString()) < new Date(new Date().toDateString());
+                const date = gift.date.toJSON().slice(0, 10);
+                return new Date(new Date(date).toDateString()) < new Date(new Date().toDateString());
             }).length;
             const giftsCount = gifts.length;
             const giftsPercent = Math.round(((giftsCount - oldGifts) / oldGifts) * 100);
