@@ -1,4 +1,5 @@
 const express = require('express');
+const crypto = require('crypto');
 const router = express.Router();
 const multer = require('multer');
 const checkAdminAuth = require('../middleware/check-admin-auth');
@@ -8,7 +9,7 @@ const storage = multer.diskStorage({
         cb(null, './itemsImages/');
     },
     filename: (req, file, cb) => {
-        cb(null, new Date().toISOString() + file.originalname);
+        cb(null, new Date().toISOString() + crypto.createHash('md5').update(file.originalname).digest('hex'));
     }
 });
 
