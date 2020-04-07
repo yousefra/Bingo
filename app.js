@@ -30,11 +30,6 @@ mongoose
         console.log('Unable to connect to the mongodb instance. Error: ', reason);
     });
 
-app.use(morgan('dev'));
-app.use('/itemsImages', express.static('itemsImages'));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, x-auth-token');
@@ -45,6 +40,12 @@ app.use((req, res, next) => {
     }
     next();
 });
+
+app.use(morgan('dev'));
+app.use('/itemsImages', express.static('itemsImages'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 
 // Routes which should handle requests
 app.use('/categories', categoriesRoutes);
