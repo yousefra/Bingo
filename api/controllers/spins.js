@@ -75,19 +75,31 @@ exports.getAllSpins = (req, res, next) => {
         .then(spins => {
             const gifts = spins.filter(spin => spin.giftFrom != 0);
 
+            // Calculate spins increase percent
             const oldSpins = spins.filter(spin => {
                 const date = spin.date.toJSON().slice(0, 10);
                 return new Date(new Date(date).toDateString()) < new Date(new Date().toDateString());
             }).length;
             const currentSpins = spins.length;
-            const percent = Math.round(((currentSpins - oldSpins) / oldSpins) * 100);
+            let percent = null;
+            if (oldSpins !== 0) {
+                percent = Math.round(((currentSpins - oldSpins) / oldSpins) * 100);
+            } else {
+                percent = currentSpins * 100;
+            }
 
+            // Calculate gifts increase percent
             const oldGifts = gifts.filter(gift => {
                 const date = gift.date.toJSON().slice(0, 10);
                 return new Date(new Date(date).toDateString()) < new Date(new Date().toDateString());
             }).length;
             const giftsCount = gifts.length;
-            const giftsPercent = Math.round(((giftsCount - oldGifts) / oldGifts) * 100);
+            let giftsPercent = null;
+            if (oldSpins !== 0) {
+                giftsPercent = Math.round(((giftsCount - oldGifts) / oldGifts) * 100);
+            } else {
+                giftsPercent = giftsCount * 100;
+            }
             res.status(200).json({
                 count: currentSpins,
                 spins: spins,

@@ -5,12 +5,18 @@ const User = require('../models/user');
 exports.getAllUsers = (req, res, next) => {
     User.find({ role: 2 })
         .then(users => {
+            // Calculate users increase percent
             const oldUsers = users.filter(user => {
                 const date = user.createdDate.toISOString().split('T')[0];
                 return new Date(new Date(date).toDateString()) < new Date(new Date().toDateString());
             }).length;
             const currentUsers = users.length;
-            const percent = Math.round(((currentUsers - oldUsers) / oldUsers) * 100);
+            let percent = null;
+            if (oldUsers !== 0) {
+                percent = Math.round(((currentUsers - oldUsers) / oldUsers) * 100);
+            } else {
+                percent = currentUsers * 100;
+            }
             res.status(200).json({
                 count: currentUsers,
                 users: users,

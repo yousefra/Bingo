@@ -3,6 +3,7 @@ const Item = require('../models/item');
 const _ = require('underscore');
 
 exports.getAll = (req, res, next) => {
+
 	Item.aggregate([
 		{ $group: { _id: '$category', count: { $sum: 1 } } }
 	])
