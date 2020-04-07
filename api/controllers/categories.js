@@ -4,16 +4,24 @@ const _ = require('underscore');
 
 exports.getAll = (req, res, next) => {
 	Item.aggregate([
-		{ $group: { _id: '$_id', count: { $sum: 1 } } }
+		{ $group: { _id: '$category', count: { $sum: 1 } } }
 	])
 		.then(items => {
 			Category.find()
 				.then(categories => {
-					// Object.defineProperty(categories, "count", { value: 0 });
-					// categories = categories.map(c => ({ ...c, count: 0 }));
-					let result = _.map(categories, item => {
-						return _.extend(item, _.findWhere(items, { _id: item._id }));
+					let result = [];
+					categories.map(category => {
+						const count = items.filter(item => item._id == category.id)[0].count;
+						const newCat = {
+							_id: category.id,
+							name: category.name,
+							title: category.title,
+							createdDate: category.createdDate,
+							count
+						}
+						result.push(newCat);
 					});
+
 					res.status(200).json({
 						count: result.length,
 						categories: result
