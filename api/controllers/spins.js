@@ -13,7 +13,16 @@ exports.addSpin = (req, res, next) => {
     spin.save()
         .then(result => {
             res.status(201).json({
-                message: 'Spin added'
+                message: 'Spin added',
+                createdSpin: {
+                    id: result._id,
+                    user: result.user,
+                    itemName: result.itemName,
+                    itemImage: result.itemImage,
+                    itemCategory: result.itemCategory,
+                    giftFrom: result.giftFrom,
+                    date: result.date
+                }
             })
         })
         .catch(err => {
