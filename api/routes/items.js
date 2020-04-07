@@ -9,7 +9,7 @@ const storage = multer.diskStorage({
         cb(null, './itemsImages/');
     },
     filename: (req, file, cb) => {
-        cb(null, new Date().toISOString() + crypto.createHash('md5').update(file.originalname).digest('hex'));
+        cb(null, crypto.createHash('md5').update(new Date().toISOString() + file.fieldname).digest('hex'));
     }
 });
 
