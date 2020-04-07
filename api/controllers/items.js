@@ -81,7 +81,9 @@ exports.updateItem = (req, res, next) => {
 			console.log(doc);
 			if (fileChanged) {
 				console.log(`Removing [${doc.image}]`);
-				fs.unlinkSync(doc.image);
+				if (fs.existsSync(doc.image)) {
+					fs.unlinkSync(doc.image);
+				}
 				console.log(`Removed [${doc.image}]`);
 			}
 			return Item.findOneAndUpdate({ _id: id }, { $set: updateOps }, { new: true });
