@@ -136,6 +136,7 @@ exports.upsertFbUser = (accessToken, refreshToken, profile, cb) => {
         if (!user) {
             var newUser = new User({
                 name: profile.displayName,
+                username: profile.emails[0].value,
                 email: profile.emails[0].value,
                 facebookProvider: {
                     id: profile.id,
