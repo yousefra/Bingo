@@ -40,7 +40,6 @@ exports.createItem = (req, res, next) => {
 		category: req.body.category,
 		createdDate: new Date()
 	});
-	console.log(item);
 	item.save()
 		.then(result => {
 			res.status(201).json({

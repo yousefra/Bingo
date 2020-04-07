@@ -6,8 +6,7 @@ module.exports = (req, res, next) => {
         const token = req.headers.authorization.split(' ')[1];
         const decoded = jwt.verify(token, process.env.JWT_KEY, null);
         User.findOne({ username: decoded.username })
-            .then(res => {
-                const user = res.toObject();
+            .then(user => {
                 if (user.role == 1) {
                     req.userData = decoded;
                     next();

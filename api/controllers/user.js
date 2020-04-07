@@ -6,7 +6,7 @@ exports.getAllUsers = (req, res, next) => {
     User.find({ role: 2 })
         .then(users => {
             const oldUsers = users.filter(user => {
-                const date = user.toObject().createdDate.split('T')[0];
+                const date = user.createdDate.toISOString().split('T')[0];
                 return new Date(new Date(date).toDateString()) < new Date(new Date().toDateString());
             }).length;
             const currentUsers = users.length;
@@ -70,10 +70,8 @@ exports.login = (req, res, next) => {
                     message: 'Auth failed'
                 });
             }
-            const password = user.password || user.toObject().password;
-            bcrypt.compare(req.body.password, password, (err, result) => {
+            bcrypt.compare(req.body.password, user.password, (err, result) => {
                 if (err) {
-                    console.log('found')
                     return res.status(401).json({
                         message: 'Auth failed'
                     });
@@ -137,7 +135,8 @@ exports.upsertFbUser = (accessToken, refreshToken, profile, cb) => {
                     id: profile.id,
                     token: accessToken
                 },
-                role: 2
+                role: 2,
+                createdDate: new Date()
             });
 
             newUser.save((error, savedUser) => {
