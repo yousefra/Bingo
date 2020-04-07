@@ -39,7 +39,7 @@ exports.sendGift = (req, res, next) => {
     User.findOne({ email: email })
         .select('_id')
         .then(doc => {
-            if (!doc) {
+            if (!doc || doc._id === req.userData.userId) {
                 res.status(404).json({
                     message: 'User not found!'
                 });

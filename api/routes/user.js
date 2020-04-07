@@ -11,6 +11,8 @@ router.post('/signup', userController.signup)
 
 router.post('/login', userController.login)
 
+router.get('/:userId', userController.getUserFbId)
+
 router.delete('/:userId', checkAdminAuth, userController.deleteUser)
 
 router.get('/isLoggedIn', checkUserAuth, userController.isLoggedIn)

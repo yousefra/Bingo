@@ -107,6 +107,22 @@ exports.login = (req, res, next) => {
         })
 };
 
+exports.getUserFbId = (req, res, next) => {
+    User.findById(req.params.userId)
+        .select('facebookProvider')
+        .then(user => {
+            res.status(200).json({
+                userId: user.facebookProvider.id
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+};
+
 exports.deleteUser = (req, res, next) => {
     User.deleteOne({ _id: req.params.userId })
         .then(result => {
