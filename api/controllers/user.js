@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const Spin = require('../models/spin');
 
 exports.getAllUsers = (req, res, next) => {
     User.find({ role: 2 })
@@ -126,7 +127,9 @@ exports.getUserFbId = (req, res, next) => {
 exports.deleteUser = (req, res, next) => {
     User.deleteOne({ _id: req.params.userId })
         .then(result => {
-            console.log(result);
+            return Spin.deleteMany({ user: req.params.userId });
+        })
+        .then(result => {
             res.status(200).json({
                 message: 'User deleted'
             });

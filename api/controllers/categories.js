@@ -84,6 +84,9 @@ exports.updateCategory = (req, res, next) => {
 exports.deleteCategory = (req, res, next) => {
 	Category.deleteOne({ _id: req.params.categoryId })
 		.then(result => {
+			return Item.deleteMany({ category: req.params.categoryId });
+		})
+		.then(result => {
 			res.status(200).json({
 				message: 'Category deleted'
 			});
