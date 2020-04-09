@@ -12,13 +12,17 @@ exports.getAll = (req, res, next) => {
 				.then(categories => {
 					let result = [];
 					categories.map(category => {
-						const count = items.filter(item => item._id == category.id)[0].count;
+						const count = items.filter(item => item._id == category.id);
+						let itemsNum = 0;
+						if (count[0]) {
+							itemsNum = count[0].count;
+						}
 						const newCat = {
 							_id: category.id,
 							name: category.name,
 							title: category.title,
 							createdDate: category.createdDate,
-							count
+							count: itemsNum
 						}
 						result.push(newCat);
 					});
