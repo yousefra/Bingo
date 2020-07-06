@@ -35,11 +35,12 @@ exports.getItemsByCategory = (req, res, next) => {
 exports.createItem = (req, res, next) => {
 	const item = new Item({
 		name: req.body.name,
-		image: req.file.path,
+		image: req.file.location,
 		backColor: req.body.backColor,
 		category: req.body.category,
 		createdDate: new Date()
 	});
+	
 	item.save()
 		.then(result => {
 			res.status(201).json({
@@ -68,7 +69,7 @@ exports.updateItem = (req, res, next) => {
 		updateOps[ops.propName] = ops.value;
 	}
 	if (fileChanged) {
-		updateOps.image = req.file.path;
+		updateOps.image = req.file.location;
 	}
 	Item.findById(id)
 		.select('image')
@@ -79,13 +80,6 @@ exports.updateItem = (req, res, next) => {
 				});
 			}
 			console.log(doc);
-			if (fileChanged) {
-				console.log(`Removing [${doc.image}]`);
-				if (fs.existsSync(doc.image)) {
-					fs.unlinkSync(doc.image);
-				}
-				console.log(`Removed [${doc.image}]`);
-			}
 			return Item.findOneAndUpdate({ _id: id }, { $set: updateOps }, { new: true });
 		})
 		.then(result => {
