@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   bingoApi: 'https://thebingoapi.herokuapp.com'
+  // bingoApi: 'http://127.0.0.1:3000'
 };
 
 /*
