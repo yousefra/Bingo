@@ -104,7 +104,7 @@ exports.getAllSpins = (req, res, next) => {
             }).length;
             const giftsCount = gifts.length;
             let giftsPercent = null;
-            if (oldSpins !== 0) {
+            if (oldGifts !== 0) {
                 giftsPercent = Math.round(((giftsCount - oldGifts) / oldGifts) * 100);
             } else {
                 giftsPercent = giftsCount * 100;
