@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
       this.spinsBoxInput.count = res['count'];
       this.spinsBoxInput.percent = res['percent'];
       this.giftsBoxInput.count = res['giftsCount'];
-      this.giftsBoxInput.precent = res['giftsPercent'];
+      this.giftsBoxInput.percent = res['giftsPercent'];
       this.spins = res['spins'];
     });
   }
