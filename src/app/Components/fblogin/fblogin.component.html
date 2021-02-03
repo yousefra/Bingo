@@ -1,0 +1,20 @@
+<div class="black-overlay"></div>
+<div class ="fullscale flex-center ion-padding">
+  <ion-card class="login-card" style="--background : white">
+    <ion-card-header class="ion-margin-horizontal">
+      <ion-card-title><h4>{{title}}</h4></ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="ion-margin-horizontal">
+      {{content}}
+    </ion-card-content>
+    <ion-button class="ion-margin ion-padding"  expand="full" color="primary" (click)="fbLogin()">
+      Login with &nbsp;
+    <ion-icon name="logo-facebook"></ion-icon>
+    </ion-button>
+    <ion-button class="ion-margin ion-padding"  expand="full" color="danger" (click)="cancel()" style="width: 50%; margin-left: 25%;">
+      Cancel
+    </ion-button>
+    <ion-item>
+    </ion-item>
+  </ion-card>
+</div>

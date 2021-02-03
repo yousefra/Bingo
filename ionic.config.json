@@ -1,0 +1,7 @@
+{
+  "name": "myionicfacebook",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

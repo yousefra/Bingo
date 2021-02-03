@@ -1,0 +1,33 @@
+<ion-content>
+  <ion-toolbar class="flex-center" style="width:80%;margin-left: 10%;margin-top: 65px;">
+    <h4 class="inline" slot="start">History</h4>
+    <hr slot="primary" class="ion-margin-horizontal" style="width: 100%; border-top: #707070 1px solid;opacity:20%">
+    <ion-list slot="end">
+      <ion-item style="height: 42px;">
+        <ion-label>Category</ion-label>
+        <ion-select (ionChange)="filter($event)" value="All" multiple="false">
+          <ion-select-option value="All">All</ion-select-option>
+          <ion-select-option value="Gifts">Gifts</ion-select-option>
+          <ion-select-option *ngFor="let item of categories" [value]="item">{{item}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </ion-toolbar>
+  <ion-list *ngIf="data.length > 0" style="padding: 0px;">
+    <!-- data element -->
+    <ion-item *ngFor="let item of data; let i = index" [attr.data-index]="i">
+      <!-- <div class="circle-icon"> </div> -->
+      <!-- <div [ngStyle]="i == data.length-1 && {'border-color': '#EFEFEF'}" class="horizontal-line"></div> -->
+      <app-history-card [item]="item" [rolledTime]="stats(item)" [stats]="percentage(item)"></app-history-card>
+    </ion-item>
+    <!-- loader element -->
+    <ion-infinite-scroll #itemlist threshold="100px" (ionInfinite)="load($event)" id="loading">
+      <ion-infinite-scroll-content loadingSpinner="bubbles">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-list>
+  <!-- no data element -->
+  <ion-item class="flex-center" *ngIf="data.length == 0">
+    <ion-label>there is no history to show</ion-label>
+  </ion-item>
+</ion-content>

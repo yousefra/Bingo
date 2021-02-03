@@ -1,0 +1,54 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    </ion-buttons>
+    <ion-title routerLink="/">
+      Bingo
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-menu side="start" menuId="first" contentId="main" type = "overlay">
+  <ion-header>
+    <div style="margin: 16px 0px;display:flex;justify-content: center;" class="flex-center"
+      *ngIf="loginService.isLoggedIn === true">
+
+      <img slot="start" class="ion-margin-horizontal" style="border-radius: 100px;margin-left:0px;"
+        src="{{loginService.users.picture.data.url}}" width="60" alt="{{loginService.users.name}}" />
+      <div>
+        <ion-card-subtitle>Hi, {{loginService.users.name}}</ion-card-subtitle>
+        <ion-card-title>{{loginService.users.email}}</ion-card-title>
+      </div>
+    </div>
+    <ion-toolbar class="ion-margin" *ngIf="loginService.isLoggedIn === false">
+      <div>
+        <ion-card-subtitle>Bingo</ion-card-subtitle>
+        <ion-card-title>It's time to Roll</ion-card-title>
+      </div>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content style="--background: white">
+    <ion-list>
+      <ion-item *ngFor="let item of pages" (click)="item.func()" [class.active-item]="item.isSelected()">
+        {{item.title}}
+      </ion-item>
+    </ion-list>
+    <ion-list class="ion-padding">
+
+      <ion-button *ngIf="loginService.isLoggedIn === false" expand="full" color="primary" (click)="fbLogin()">
+        Login with &nbsp;
+        <ion-icon name="logo-facebook"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="loginService.isLoggedIn === true" expand="full" color="secondary" (click)="logoutConfirm()">
+        Logout
+        <ion-icon class="ion-padding" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-router-outlet id="main"></ion-router-outlet>

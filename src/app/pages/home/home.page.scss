@@ -1,0 +1,79 @@
+ion-content ion-toolbar {
+  --background: translucent;
+}
+
+.slider-element
+{
+  h1
+  {
+    opacity: 20%;
+    color: #344258;
+    font-size: 24px;
+    text-align: center;
+  }
+}
+
+.slider-selected
+{
+  h1
+  {
+    opacity: 100%;
+    color: #344258;
+    font-size: 24px;
+    text-align: center;
+  }
+}
+
+@keyframes selected
+{
+  from
+  {
+    opacity: 20%;
+    font-size: 24px;
+  }
+  to
+  {
+    opacity: 100%;
+    font-size: 35px;
+  }
+}
+
+@keyframes unselected
+{
+  from
+  {
+    opacity: 100%;
+    font-size: 35px;
+  }
+  to
+  {
+    opacity: 20%;
+    font-size: 24px;
+    
+  }
+}
+
+
+*
+{
+    box-sizing: border-box;
+}
+
+ion-grid
+{
+
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.blackbox
+{
+   position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;height: 100vh;
+    z-index: 0;
+    opacity: 0%;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+

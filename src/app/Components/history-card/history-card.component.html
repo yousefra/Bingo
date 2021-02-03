@@ -1,0 +1,34 @@
+<div class="card" tabindex="0">
+  <div class="main-content">
+    <div class="right-content">
+      <img-loader style="width: 100px;" [src]="item.img" useImg></img-loader>
+      <div class="info-box ">
+        <h4>{{item.name}}</h4><br>
+        <p>{{format()}}</p>
+      </div>
+    </div>
+    <div class="left-content">
+      <img width="28px" *ngIf="item.gifter != undefined" src="assets/icon/gift.png" alt="">
+      <img width="28px" *ngIf="item.gifter == undefined" src="assets/icon/medal.png" alt="">
+    </div>
+  </div>
+  <hr class="breakline">
+  <div *ngIf="item.gifter == undefined" class="description">
+    <div>{{item.category}}</div>
+    <div>
+      <img width="14px" src="assets/icon/replay.png" alt="">
+      <p>{{rolledTime}}</p>
+    </div>
+    <div>{{stats}}% of times</div>
+  </div>
+  <div *ngIf="item.gifter != undefined" class="gift-desc">
+    <div>{{item.category}}</div>
+    <div class="flex-center">
+      <img-loader class="gifter-picture" [src]="item.gifterPic" useImg></img-loader>
+      <div class="ion-margin-start">
+        <p>Gift by</p> <br>
+        <h5>{{item.gifter}}</h5>
+      </div>
+    </div>
+  </div>
+</div>

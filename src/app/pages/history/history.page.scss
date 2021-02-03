@@ -1,0 +1,38 @@
+ion-content ion-toolbar {
+  --background: translucent;
+}
+
+ion-content * {
+  --background: transparent;
+  background: transparent;
+  --border-color: transparent !important;
+}
+
+ion-item {
+  overflow: visible;
+  width: 95%;
+  margin: 10px 2.5%;
+}
+
+// removed for now
+// .circle-icon 
+// {
+//   position: absolute;
+//   width: 10px;
+//   height: 10px;
+//   left: calc(39px);
+//   top : 45px;
+//   border-radius: 10px;
+//   background-color: rgb(180, 180, 180) !important;
+//   z-index: 4;
+// }
+// .horizontal-line
+// {
+//   position: absolute;
+//   height: 220px;
+//   border: solid 1px #6d6d6d;
+//   width: 0px;
+
+//   left: calc(-35px);
+//   top : 45px;
+// }

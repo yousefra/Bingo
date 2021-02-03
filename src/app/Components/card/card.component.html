@@ -1,0 +1,22 @@
+<!-- card face -->
+<div class="card">
+    <div [ngClass]="{'flex-center': item.name.length == 0 }">
+        <!-- card face with image and text -->
+        <div *ngIf="item.img" class="card-img">
+            <img-loader [ngStyle]="item.name.length == 0?{ 'margin': '0px' }:{}" [src]="item.img" width="150px" useImg>
+            </img-loader>
+        </div>
+        <div *ngIf="item.img" class="card-text flex-center ion-padding-horizontal" style="font-size: 100%;">
+            <h2>{{item.name}}</h2>
+        </div>
+        <!-- card face with text only -->
+        <div *ngIf="!item.img" class="card-text fullscale flex-center" style="height:235px;padding: 8px">
+            <h1>{{item.name}}</h1>
+        </div>
+    </div>
+</div>
+<!-- card back -->
+<div [ngStyle]="{'background-color' : item.backColor}" class="card-back">
+    <div class="card-back-layer2">
+    </div>
+</div>

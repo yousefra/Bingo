@@ -1,0 +1,22 @@
+:host
+{
+    height: 100%;
+    width: 100%;
+    top: 0px;
+
+    right: 0px;
+
+    position: fixed;
+
+    margin: 0px;
+
+    z-index: 1000;
+
+}
+
+.login-card
+{
+    width: 80%;
+    max-width : 500px;
+    min-width : 250px;
+}

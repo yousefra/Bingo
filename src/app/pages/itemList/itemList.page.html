@@ -1,0 +1,29 @@
+
+<ion-content>
+  <!-- item list toolbar -->
+  <ion-toolbar style="position:fixed; margin-top: 70px;margin-left: 25px;margin-right: 25px;width: calc(100% - 50px);z-index: 100;">
+    <!-- category selector -->
+    <ion-list slot="end">
+      <ion-item  slot="end" style="height: 42px;">
+        <ion-label>Category</ion-label>
+        <ion-select (ionChange) = "changeCategory($event)" value="All" multiple="false" >
+          <ion-select-option *ngFor="let item of categories" [value]="item">{{item}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <!-- search bar -->
+    <ion-searchbar (input)="filter($event)"></ion-searchbar>
+  </ion-toolbar>
+  <!-- items list -->
+  <ion-list  [ngStyle]="listStyle()" style="margin-top: 120px;display: flex;flex-wrap: wrap;" >     
+    <app-card *ngFor="let item of data" style="transform-origin: center;transform: scale(0.8);width: 150px;height: 220px;"
+    [item] = "item">
+    </app-card>
+  </ion-list>
+  <!-- item loader -->
+  <ion-infinite-scroll #itemlist threshold="50px" (ionInfinite)="loadData($event)" id = "loading">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

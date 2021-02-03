@@ -1,0 +1,9 @@
+<div class="card-set">
+    <!-- Decks cards-->
+    <app-card class="card0" [item]="itemsQueue[7]"></app-card>
+    <app-card class="card6" [item]="itemsQueue[7]"></app-card>
+    <!-- Cards -->
+    <app-card id="card-set" class="card{{i}}" *ngFor="let item of itemsQueue.slice(0,7); let i = index"
+        [attr.data-index]="i" [ngStyle]="cardAnimation(i)" [item]="item">
+    </app-card>
+</div>

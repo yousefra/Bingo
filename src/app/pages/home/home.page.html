@@ -1,0 +1,72 @@
+<ion-content style="height: calc(100vh - 120px);margin-top: 120px;" class="flex-center" [fullscreen]="true">
+  <ion-grid>
+    <!-- Category descrption side -->
+    <ion-row>
+      <ion-toolbar class="flex-center" style="margin-top: 80px;margin-bottom: 30px;text-align: center;" >
+        <ion-title><h4>{{title}}</h4></ion-title>
+      </ion-toolbar>
+    </ion-row>  
+    <!-- card set row -->
+    <ion-row>
+      <ion-col offset="3" size="6" class="ion-align-items-center">
+        <app-card-set [ngStyle]="cardSetScale()" #cardset (Spinning)="finished($event)" class="ion-align-items-center"></app-card-set>
+      </ion-col>
+    </ion-row>
+    <!-- spin and gift pop up -->
+    <ion-row>
+      <ion-col  offset-xs="2" size-xs="8"  offset-sm="3" size-sm="6" offset-md="4" size-md="4" offset-lg="5" size-lg="2" class="ion-align-items-center" class="ion-margin-vertical">
+        <!-- spin button -->
+        <ion-button  id = "spin-button" *ngIf="!spinned" (click)="cardset.spin(30,true);lockSlide(true)" expand="block" fill = "solid" shape="round">
+          Spin
+        </ion-button>
+        <!-- gift pop up -->
+        <div *ngIf="spinned" (dblclick)= "reset()" class="blackbox"></div>
+        <ion-card *ngIf="spinned" style="--background:white;z-index: 3;position: absolute; top : -35px;width: 100%;padding: 0px 16px;right: 2.25%;margin:0px">
+          <ion-card-header>
+            <ion-card-title><h4 class="inline">Like it? Gift it!</h4></ion-card-title>
+          </ion-card-header>
+          <form [formGroup]="loginForm" (ngSubmit)="gift()">
+            <ion-item>
+              <ion-label position="floating">Email </ion-label>
+              <ion-input required formControlName="email" type="email"></ion-input>
+            </ion-item>
+            <ion-button *ngIf="!gifted" class="flex-center ion-margin" block color="primary" type="submit" [disabled]="loginForm.invalid">
+              <ion-text class="ion-text-center">
+                <p>Share it</p>
+              </ion-text>   
+            </ion-button>
+            <ion-card *ngIf="gifted" class="flex-center ion-margin" style="height: 36px" color = "success" block > 
+              <p>Gifted</p>
+            </ion-card>
+            <ion-button style="margin-right: 12.5%;margin-left: 12.5%;height:40px;" class="flex-center ion-margin" block color="primary" (click) = "reset()" color="danger">
+              <ion-text class="ion-text-center">
+                <p *ngIf="!gifted">Keep it for me</p>
+                <p *ngIf="gifted"> leave </p>
+              </ion-text>   
+            </ion-button>
+          </form>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <!-- category select row -->
+    <ion-row>
+      <ion-col [hidden]="spinned" offset-xs="2" size-xs="8"  offset-sm="3" size-sm="6" offset-md="4" size-md="4" offset-lg="5" size-lg="2" class="ion-align-items-center">
+        <ion-slides #slide (ionSlideDidChange)="slideChange($event);cardset.changeCategory(currentCatagory)" mode="md" pager="false" scrollbar="false" style="width:120px;overflow:initial;">
+          <ion-slide style="height: 50px;" *ngFor="let item of categories; let i = index" [attr.data-index]="i">
+            <div class="slider-element" (click)="slideTo(i)"><h1 [ngStyle]="slideStyle(i)">{{item}}</h1></div>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+    </ion-row>
+  </ion-grid>
+  
+  <!-- fb login pop up -->
+  <app-fblogin 
+  title = "Login to Gift"
+  content = "unleash your possibilities "
+  (loginSuccess) = "gift()"
+  (cancelEvent)="cancelGiftLogin()" *ngIf="loginToGift"></app-fblogin>
+</ion-content>
+
